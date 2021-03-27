@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarvelAPI.Data", "src\MarvelAPI.Data\MarvelAPI.Data.csproj", "{0D871DD8-65F6-4F1C-8554-0CC533F876F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarvelAPI.Business", "src\MarvelAPI.Business\MarvelAPI.Business.csproj", "{CAB914CD-1B66-4BB0-A875-3084E0BE7C3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarvelAPI.Test", "tests\MarvelAPI.Test\MarvelAPI.Test.csproj", "{D8D6A968-87F2-459D-83F7-B8EA3BB01531}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarvelAPI.Api", "src\MarvelAPI.Api\MarvelAPI.Api.csproj", "{99557456-CECA-4CA8-88E8-7E23FD979550}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D871DD8-65F6-4F1C-8554-0CC533F876F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D871DD8-65F6-4F1C-8554-0CC533F876F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D871DD8-65F6-4F1C-8554-0CC533F876F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D871DD8-65F6-4F1C-8554-0CC533F876F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB914CD-1B66-4BB0-A875-3084E0BE7C3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB914CD-1B66-4BB0-A875-3084E0BE7C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB914CD-1B66-4BB0-A875-3084E0BE7C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB914CD-1B66-4BB0-A875-3084E0BE7C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D6A968-87F2-459D-83F7-B8EA3BB01531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D6A968-87F2-459D-83F7-B8EA3BB01531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D6A968-87F2-459D-83F7-B8EA3BB01531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D6A968-87F2-459D-83F7-B8EA3BB01531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99557456-CECA-4CA8-88E8-7E23FD979550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99557456-CECA-4CA8-88E8-7E23FD979550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99557456-CECA-4CA8-88E8-7E23FD979550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99557456-CECA-4CA8-88E8-7E23FD979550}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DAA0AFF3-698B-41C4-B3D4-4640A3C7F144}
+	EndGlobalSection
+EndGlobal
