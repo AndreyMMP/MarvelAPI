@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MarvelAPI.Data.Mapping
 {
-    public class ItemMapping : IEntityTypeConfiguration<Item>
+    public class ComicsItemMapping : IEntityTypeConfiguration<ComicsItem>
     {
-        public void Configure(EntityTypeBuilder<Item> builder)
+        public void Configure(EntityTypeBuilder<ComicsItem> builder)
         {
             builder.HasKey(p => p.Id);
-            builder.ToTable("Item");
+            builder.ToTable("ComicsItem");
         }
     }
 }

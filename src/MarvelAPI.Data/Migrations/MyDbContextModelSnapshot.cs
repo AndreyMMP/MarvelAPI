@@ -31,51 +31,15 @@ namespace MarvelAPI.Data.Migrations
                     b.Property<string>("AttributionText")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Copyright")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Etag")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Character");
-                });
-
-            modelBuilder.Entity("MarvelAPI.Business.Models.CharacterData", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CharacterId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Count")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Limit")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Offset")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Total")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CharacterId")
-                        .IsUnique();
-
-                    b.ToTable("CharacterData");
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.CharacterInformation", b =>
@@ -85,7 +49,7 @@ namespace MarvelAPI.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CharacterDataId")
+                    b.Property<int>("CharacterId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -105,7 +69,7 @@ namespace MarvelAPI.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CharacterDataId");
+                    b.HasIndex("CharacterId");
 
                     b.ToTable("CharacterInformation");
                 });
@@ -126,15 +90,35 @@ namespace MarvelAPI.Data.Migrations
                     b.Property<string>("CollectionURI")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Returned")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CharacterInformationId")
                         .IsUnique();
 
                     b.ToTable("Comics");
+                });
+
+            modelBuilder.Entity("MarvelAPI.Business.Models.ComicsItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComicsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResourceURI")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComicsId");
+
+                    b.ToTable("ComicsItem");
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Events", b =>
@@ -153,9 +137,6 @@ namespace MarvelAPI.Data.Migrations
                     b.Property<string>("CollectionURI")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Returned")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CharacterInformationId")
@@ -164,15 +145,12 @@ namespace MarvelAPI.Data.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("MarvelAPI.Business.Models.Item", b =>
+            modelBuilder.Entity("MarvelAPI.Business.Models.EventsItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ComicsId")
-                        .HasColumnType("int");
 
                     b.Property<int>("EventsId")
                         .HasColumnType("int");
@@ -183,26 +161,11 @@ namespace MarvelAPI.Data.Migrations
                     b.Property<string>("ResourceURI")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SeriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ComicsId");
 
                     b.HasIndex("EventsId");
 
-                    b.HasIndex("SeriesId");
-
-                    b.HasIndex("StoriesId");
-
-                    b.ToTable("Item");
+                    b.ToTable("EventsItem");
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Series", b =>
@@ -221,15 +184,35 @@ namespace MarvelAPI.Data.Migrations
                     b.Property<string>("CollectionURI")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Returned")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CharacterInformationId")
                         .IsUnique();
 
                     b.ToTable("Series");
+                });
+
+            modelBuilder.Entity("MarvelAPI.Business.Models.SeriesItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResourceURI")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SeriesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SeriesId");
+
+                    b.ToTable("SeriesItem");
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Stories", b =>
@@ -248,15 +231,38 @@ namespace MarvelAPI.Data.Migrations
                     b.Property<string>("CollectionURI")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Returned")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CharacterInformationId")
                         .IsUnique();
 
                     b.ToTable("Stories");
+                });
+
+            modelBuilder.Entity("MarvelAPI.Business.Models.StoriesItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResourceURI")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StoriesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StoriesId");
+
+                    b.ToTable("StoriesItem");
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Thumbnail", b =>
@@ -306,24 +312,14 @@ namespace MarvelAPI.Data.Migrations
                     b.ToTable("Url");
                 });
 
-            modelBuilder.Entity("MarvelAPI.Business.Models.CharacterData", b =>
+            modelBuilder.Entity("MarvelAPI.Business.Models.CharacterInformation", b =>
                 {
                     b.HasOne("MarvelAPI.Business.Models.Character", "Character")
-                        .WithOne("CharacterData")
-                        .HasForeignKey("MarvelAPI.Business.Models.CharacterData", "CharacterId")
+                        .WithMany("CharacterInformations")
+                        .HasForeignKey("CharacterId")
                         .IsRequired();
 
                     b.Navigation("Character");
-                });
-
-            modelBuilder.Entity("MarvelAPI.Business.Models.CharacterInformation", b =>
-                {
-                    b.HasOne("MarvelAPI.Business.Models.CharacterData", "CharacterData")
-                        .WithMany("CharacterInformations")
-                        .HasForeignKey("CharacterDataId")
-                        .IsRequired();
-
-                    b.Navigation("CharacterData");
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Comics", b =>
@@ -336,6 +332,16 @@ namespace MarvelAPI.Data.Migrations
                     b.Navigation("CharacterInformation");
                 });
 
+            modelBuilder.Entity("MarvelAPI.Business.Models.ComicsItem", b =>
+                {
+                    b.HasOne("MarvelAPI.Business.Models.Comics", "Comics")
+                        .WithMany("Items")
+                        .HasForeignKey("ComicsId")
+                        .IsRequired();
+
+                    b.Navigation("Comics");
+                });
+
             modelBuilder.Entity("MarvelAPI.Business.Models.Events", b =>
                 {
                     b.HasOne("MarvelAPI.Business.Models.CharacterInformation", "CharacterInformation")
@@ -346,35 +352,14 @@ namespace MarvelAPI.Data.Migrations
                     b.Navigation("CharacterInformation");
                 });
 
-            modelBuilder.Entity("MarvelAPI.Business.Models.Item", b =>
+            modelBuilder.Entity("MarvelAPI.Business.Models.EventsItem", b =>
                 {
-                    b.HasOne("MarvelAPI.Business.Models.Comics", "Comics")
-                        .WithMany("Items")
-                        .HasForeignKey("ComicsId")
-                        .IsRequired();
-
                     b.HasOne("MarvelAPI.Business.Models.Events", "Events")
                         .WithMany("Items")
                         .HasForeignKey("EventsId")
                         .IsRequired();
 
-                    b.HasOne("MarvelAPI.Business.Models.Series", "Series")
-                        .WithMany("Items")
-                        .HasForeignKey("SeriesId")
-                        .IsRequired();
-
-                    b.HasOne("MarvelAPI.Business.Models.Stories", "Stories")
-                        .WithMany("Items")
-                        .HasForeignKey("StoriesId")
-                        .IsRequired();
-
-                    b.Navigation("Comics");
-
                     b.Navigation("Events");
-
-                    b.Navigation("Series");
-
-                    b.Navigation("Stories");
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Series", b =>
@@ -387,6 +372,16 @@ namespace MarvelAPI.Data.Migrations
                     b.Navigation("CharacterInformation");
                 });
 
+            modelBuilder.Entity("MarvelAPI.Business.Models.SeriesItem", b =>
+                {
+                    b.HasOne("MarvelAPI.Business.Models.Series", "Series")
+                        .WithMany("Items")
+                        .HasForeignKey("SeriesId")
+                        .IsRequired();
+
+                    b.Navigation("Series");
+                });
+
             modelBuilder.Entity("MarvelAPI.Business.Models.Stories", b =>
                 {
                     b.HasOne("MarvelAPI.Business.Models.CharacterInformation", "CharacterInformation")
@@ -395,6 +390,16 @@ namespace MarvelAPI.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("CharacterInformation");
+                });
+
+            modelBuilder.Entity("MarvelAPI.Business.Models.StoriesItem", b =>
+                {
+                    b.HasOne("MarvelAPI.Business.Models.Stories", "Stories")
+                        .WithMany("Items")
+                        .HasForeignKey("StoriesId")
+                        .IsRequired();
+
+                    b.Navigation("Stories");
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Thumbnail", b =>
@@ -418,11 +423,6 @@ namespace MarvelAPI.Data.Migrations
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Character", b =>
-                {
-                    b.Navigation("CharacterData");
-                });
-
-            modelBuilder.Entity("MarvelAPI.Business.Models.CharacterData", b =>
                 {
                     b.Navigation("CharacterInformations");
                 });

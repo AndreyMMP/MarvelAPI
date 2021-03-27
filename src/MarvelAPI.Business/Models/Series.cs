@@ -2,14 +2,10 @@
 
 namespace MarvelAPI.Business.Models
 {
-    public class Series : Entity
-    {
-        public string Available { get; set; }
-        public string Returned { get; set; }
-        public string CollectionURI { get; set; }        
-        /* EF Relations */
+    public class Series : Collection
+    {              
         public int CharacterInformationId { get; set; }
         public CharacterInformation CharacterInformation { get; set; }
-        public IEnumerable<Item> Items { get; set; }
+        public IEnumerable<SeriesItem> Items { get; set; }
     }
 }

@@ -18,4 +18,8 @@
     <ProjectReference Include="..\MarvelAPI.Business\MarvelAPI.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

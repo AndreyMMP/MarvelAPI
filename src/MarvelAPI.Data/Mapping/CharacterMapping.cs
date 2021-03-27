@@ -10,8 +10,9 @@ namespace MarvelAPI.Data.Mapping
         {
             builder.HasKey(p => p.Id);
 
-            builder.HasOne(f => f.CharacterData)
-                    .WithOne(e => e.Character);
+            builder.HasMany(f => f.CharacterInformations)
+                    .WithOne(p => p.Character)
+                    .HasForeignKey(p => p.CharacterId);
 
             builder.ToTable("Character");
         }

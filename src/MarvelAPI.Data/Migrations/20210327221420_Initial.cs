@@ -12,8 +12,6 @@ namespace MarvelAPI.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Copyright = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AttributionText = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AttributionHTML = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -22,29 +20,6 @@ namespace MarvelAPI.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Character", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CharacterData",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Offset = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Limit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Total = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Count = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CharacterId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CharacterData", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CharacterData_Character_CharacterId",
-                        column: x => x.CharacterId,
-                        principalTable: "Character",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,15 +33,15 @@ namespace MarvelAPI.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Modified = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ResourceURI = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CharacterDataId = table.Column<int>(type: "int", nullable: false)
+                    CharacterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CharacterInformation", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CharacterInformation_CharacterData_CharacterDataId",
-                        column: x => x.CharacterDataId,
-                        principalTable: "CharacterData",
+                        name: "FK_CharacterInformation_Character_CharacterId",
+                        column: x => x.CharacterId,
+                        principalTable: "Character",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -77,10 +52,9 @@ namespace MarvelAPI.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CharacterInformationId = table.Column<int>(type: "int", nullable: false),
                     Available = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Returned = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CharacterInformationId = table.Column<int>(type: "int", nullable: false)
+                    CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -99,10 +73,9 @@ namespace MarvelAPI.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CharacterInformationId = table.Column<int>(type: "int", nullable: false),
                     Available = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Returned = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CharacterInformationId = table.Column<int>(type: "int", nullable: false)
+                    CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -121,10 +94,9 @@ namespace MarvelAPI.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CharacterInformationId = table.Column<int>(type: "int", nullable: false),
                     Available = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Returned = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CharacterInformationId = table.Column<int>(type: "int", nullable: false)
+                    CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -143,10 +115,9 @@ namespace MarvelAPI.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CharacterInformationId = table.Column<int>(type: "int", nullable: false),
                     Available = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Returned = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CharacterInformationId = table.Column<int>(type: "int", nullable: false)
+                    CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -202,42 +173,84 @@ namespace MarvelAPI.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Item",
+                name: "ComicsItem",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ComicsId = table.Column<int>(type: "int", nullable: false),
                     ResourceURI = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SeriesId = table.Column<int>(type: "int", nullable: false),
-                    EventsId = table.Column<int>(type: "int", nullable: false),
-                    StoriesId = table.Column<int>(type: "int", nullable: false),
-                    ComicsId = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Item", x => x.Id);
+                    table.PrimaryKey("PK_ComicsItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Item_Comics_ComicsId",
+                        name: "FK_ComicsItem_Comics_ComicsId",
                         column: x => x.ComicsId,
                         principalTable: "Comics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventsItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EventsId = table.Column<int>(type: "int", nullable: false),
+                    ResourceURI = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventsItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Item_Events_EventsId",
+                        name: "FK_EventsItem_Events_EventsId",
                         column: x => x.EventsId,
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SeriesItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SeriesId = table.Column<int>(type: "int", nullable: false),
+                    ResourceURI = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SeriesItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Item_Series_SeriesId",
+                        name: "FK_SeriesItem_Series_SeriesId",
                         column: x => x.SeriesId,
                         principalTable: "Series",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StoriesItem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StoriesId = table.Column<int>(type: "int", nullable: false),
+                    ResourceURI = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StoriesItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Item_Stories_StoriesId",
+                        name: "FK_StoriesItem_Stories_StoriesId",
                         column: x => x.StoriesId,
                         principalTable: "Stories",
                         principalColumn: "Id",
@@ -245,15 +258,9 @@ namespace MarvelAPI.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CharacterData_CharacterId",
-                table: "CharacterData",
-                column: "CharacterId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CharacterInformation_CharacterDataId",
+                name: "IX_CharacterInformation_CharacterId",
                 table: "CharacterInformation",
-                column: "CharacterDataId");
+                column: "CharacterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comics_CharacterInformationId",
@@ -262,30 +269,20 @@ namespace MarvelAPI.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ComicsItem_ComicsId",
+                table: "ComicsItem",
+                column: "ComicsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Events_CharacterInformationId",
                 table: "Events",
                 column: "CharacterInformationId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Item_ComicsId",
-                table: "Item",
-                column: "ComicsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Item_EventsId",
-                table: "Item",
+                name: "IX_EventsItem_EventsId",
+                table: "EventsItem",
                 column: "EventsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Item_SeriesId",
-                table: "Item",
-                column: "SeriesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Item_StoriesId",
-                table: "Item",
-                column: "StoriesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Series_CharacterInformationId",
@@ -294,10 +291,20 @@ namespace MarvelAPI.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_SeriesItem_SeriesId",
+                table: "SeriesItem",
+                column: "SeriesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Stories_CharacterInformationId",
                 table: "Stories",
                 column: "CharacterInformationId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StoriesItem_StoriesId",
+                table: "StoriesItem",
+                column: "StoriesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Thumbnail_CharacterInformationId",
@@ -314,7 +321,16 @@ namespace MarvelAPI.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Item");
+                name: "ComicsItem");
+
+            migrationBuilder.DropTable(
+                name: "EventsItem");
+
+            migrationBuilder.DropTable(
+                name: "SeriesItem");
+
+            migrationBuilder.DropTable(
+                name: "StoriesItem");
 
             migrationBuilder.DropTable(
                 name: "Thumbnail");
@@ -336,9 +352,6 @@ namespace MarvelAPI.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "CharacterInformation");
-
-            migrationBuilder.DropTable(
-                name: "CharacterData");
 
             migrationBuilder.DropTable(
                 name: "Character");
