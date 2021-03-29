@@ -18,7 +18,31 @@ namespace MarvelAPI.Data.Repository
 
         public async Task<IEnumerable<Character>> ObterTodosComDetalhes()
         {
-            return await _context.Character.AsNoTracking().Include(x => x.CharacterInformations).ToListAsync();
+            return await _context.Character.AsNoTracking()
+
+                .Include(x => x.CharacterInformations)
+                    .ThenInclude(x => x.Comics)
+                        .ThenInclude(x => x.Items)
+
+                .Include(x=> x.CharacterInformations)
+                    .ThenInclude(x => x.Series)
+                        .ThenInclude(x => x.Items)
+
+                .Include(x => x.CharacterInformations)
+                    .ThenInclude(x => x.Stories)
+                        .ThenInclude(x => x.Items)
+
+                .Include(x => x.CharacterInformations)
+                    .ThenInclude(x => x.Events)
+                        .ThenInclude(x => x.Items)
+
+                .Include(x => x.CharacterInformations)
+                    .ThenInclude(x => x.Urls)
+
+                .Include(x => x.CharacterInformations)
+                    .ThenInclude(x => x.Thumbnail)
+
+                .ToListAsync();
         }
     }
 }

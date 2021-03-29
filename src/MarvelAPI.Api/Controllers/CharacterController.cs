@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using MarvelAPI.Api.ViewModels;
+using MarvelAPI.Api.ViewModels.Utils;
 using MarvelAPI.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MarvelAPI.Api.Controllers
@@ -21,17 +23,26 @@ namespace MarvelAPI.Api.Controllers
             _mapper = mapper;
         }
         [HttpGet()]
-        public async Task<string> Get()
+        public async Task<string> ObterTodos()
         {
             try
             {
-                var characters = _mapper.Map<IEnumerable<CharacterViewModel>>(await _characterRepository.ObterTodosComDetalhes());
-                return JsonConvert.SerializeObject(characters);
+                var characters = await _characterRepository.ObterTodosComDetalhes();
+
+                if (!characters.Any())
+                    return JsonConvert.SerializeObject(PopularErrorViewModel(EHttpStatusCode.NotFound, MessageConstants.PersonagensNaoLocalizados, string.Empty), Formatting.Indented);
+
+                return JsonConvert.SerializeObject(_mapper.Map<IEnumerable<CharacterViewModel>>(characters), Formatting.Indented);
             }
             catch (Exception ex)
             {
-                return JsonConvert.SerializeObject("");
+                return JsonConvert.SerializeObject(PopularErrorViewModel(EHttpStatusCode.BadRequest, ex.Message, string.Empty), Formatting.Indented);
             }
+
+        }
+        private ErrorViewModel PopularErrorViewModel(EHttpStatusCode statusCode, string message, string userInput)
+        {
+            return new ErrorViewModel() { StatusCode = (int)statusCode, Message = message, UserInput = userInput };
         }
     }
 }
