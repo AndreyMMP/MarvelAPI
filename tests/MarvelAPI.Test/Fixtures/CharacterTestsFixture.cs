@@ -40,7 +40,7 @@ namespace MarvelAPI.Test.Fixtures
                 Description = GerarTexto(),
                 Modified = DateTime.Now.ToString(),
                 ResourceURI = GerarTexto(),
-                MarvelId = GerarNumero().ToString()
+                MarvelId = GerarNumero()
             };
             characterInformation.Series = GerarSeries(characterInformation);
             characterInformation.Comics = GerarComics(characterInformation);
@@ -83,7 +83,7 @@ namespace MarvelAPI.Test.Fixtures
                 CharacterInformation = characterInformation,
                 CharacterInformationId = characterInformation.Id,
                 Id = GerarNumero(),
-                Available = GerarNumero().ToString(),
+                Available = GerarNumero(),
                 CollectionURI = GerarTexto()
             };
             stories.Items = GerarStoriesItem(stories);
@@ -111,7 +111,7 @@ namespace MarvelAPI.Test.Fixtures
                 CharacterInformation = characterInformation,
                 CharacterInformationId = characterInformation.Id,
                 Id = GerarNumero(),
-                Available = GerarNumero().ToString(),
+                Available = GerarNumero(),
                 CollectionURI = GerarTexto()
             };
             events.Items = GerarEventsItem(events);
@@ -138,7 +138,7 @@ namespace MarvelAPI.Test.Fixtures
                 CharacterInformation = characterInformation,
                 CharacterInformationId = characterInformation.Id,
                 Id = GerarNumero(),
-                Available = GerarNumero().ToString(),
+                Available = GerarNumero(),
                 CollectionURI = GerarTexto()
             };
             comics.Items = GerarComicsItem(comics);
@@ -165,7 +165,7 @@ namespace MarvelAPI.Test.Fixtures
                 CharacterInformation = characterInformation,
                 CharacterInformationId = characterInformation.Id,
                 Id = GerarNumero(),
-                Available = GerarNumero().ToString(),
+                Available = GerarNumero(),
                 CollectionURI = GerarTexto()
             };
             series.Items = GerarSeriesItem(series);

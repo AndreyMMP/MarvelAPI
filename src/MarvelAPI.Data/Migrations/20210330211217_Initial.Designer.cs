@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarvelAPI.Data.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210327221420_Initial")]
+    [Migration("20210330211217_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,16 @@ namespace MarvelAPI.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Character");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AttributionHTML = "<a href=\"http://marvel.com\">Data provided by Marvel. © 2021 MARVEL</a>",
+                            AttributionText = "Data provided by Marvel. © 2021 MARVEL",
+                            Copyright = "© 2021 MARVEL",
+                            Etag = "20cf4cd43cc9cd35833392e0964888958f576824"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.CharacterInformation", b =>
@@ -57,8 +67,8 @@ namespace MarvelAPI.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MarvelId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("MarvelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Modified")
                         .HasColumnType("nvarchar(max)");
@@ -74,6 +84,18 @@ namespace MarvelAPI.Data.Migrations
                     b.HasIndex("CharacterId");
 
                     b.ToTable("CharacterInformation");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CharacterId = 1,
+                            Description = "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction!",
+                            MarvelId = 1017100,
+                            Modified = "30/03/2021 17:12:16",
+                            Name = "A-Bomb (HAS)",
+                            ResourceURI = "http://gateway.marvel.com/v1/public/characters/1017100"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Comics", b =>
@@ -83,8 +105,8 @@ namespace MarvelAPI.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Available")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Available")
+                        .HasColumnType("int");
 
                     b.Property<int>("CharacterInformationId")
                         .HasColumnType("int");
@@ -98,6 +120,15 @@ namespace MarvelAPI.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Comics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Available = 3,
+                            CharacterInformationId = 1,
+                            CollectionURI = "http://gateway.marvel.com/v1/public/characters/1017100/comics"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.ComicsItem", b =>
@@ -121,6 +152,29 @@ namespace MarvelAPI.Data.Migrations
                     b.HasIndex("ComicsId");
 
                     b.ToTable("ComicsItem");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ComicsId = 1,
+                            Name = "Hulk (2008) #53",
+                            ResourceURI = "http://gateway.marvel.com/v1/public/comics/40632"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ComicsId = 1,
+                            Name = "Hulk (2008) #54",
+                            ResourceURI = "http://gateway.marvel.com/v1/public/comics/40630"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ComicsId = 1,
+                            Name = "Hulk (2008) #55",
+                            ResourceURI = "http://gateway.marvel.com/v1/public/comics/40628"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Events", b =>
@@ -130,8 +184,8 @@ namespace MarvelAPI.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Available")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Available")
+                        .HasColumnType("int");
 
                     b.Property<int>("CharacterInformationId")
                         .HasColumnType("int");
@@ -145,6 +199,15 @@ namespace MarvelAPI.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Events");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Available = 0,
+                            CharacterInformationId = 1,
+                            CollectionURI = "http://gateway.marvel.com/v1/public/characters/1017100/events"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.EventsItem", b =>
@@ -177,8 +240,8 @@ namespace MarvelAPI.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Available")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Available")
+                        .HasColumnType("int");
 
                     b.Property<int>("CharacterInformationId")
                         .HasColumnType("int");
@@ -192,6 +255,15 @@ namespace MarvelAPI.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Series");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Available = 2,
+                            CharacterInformationId = 1,
+                            CollectionURI = "http://gateway.marvel.com/v1/public/characters/1017100/series"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.SeriesItem", b =>
@@ -215,6 +287,22 @@ namespace MarvelAPI.Data.Migrations
                     b.HasIndex("SeriesId");
 
                     b.ToTable("SeriesItem");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "FREE COMIC BOOK DAY 2013 1 (2013)",
+                            ResourceURI = "http://gateway.marvel.com/v1/public/series/17765",
+                            SeriesId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Hulk (2008 - 2012)",
+                            ResourceURI = "http://gateway.marvel.com/v1/public/series/3374",
+                            SeriesId = 1
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Stories", b =>
@@ -224,8 +312,8 @@ namespace MarvelAPI.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Available")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Available")
+                        .HasColumnType("int");
 
                     b.Property<int>("CharacterInformationId")
                         .HasColumnType("int");
@@ -239,6 +327,15 @@ namespace MarvelAPI.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Stories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Available = 2,
+                            CharacterInformationId = 1,
+                            CollectionURI = "http://gateway.marvel.com/v1/public/characters/1017100/stories"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.StoriesItem", b =>
@@ -265,6 +362,24 @@ namespace MarvelAPI.Data.Migrations
                     b.HasIndex("StoriesId");
 
                     b.ToTable("StoriesItem");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Hulk (2008) #55",
+                            ResourceURI = "http://gateway.marvel.com/v1/public/stories/92078",
+                            StoriesId = 1,
+                            Type = "cover"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Interior #92079",
+                            ResourceURI = "http://gateway.marvel.com/v1/public/stories/92079",
+                            StoriesId = 1,
+                            Type = "interiorStory"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Thumbnail", b =>
@@ -289,6 +404,15 @@ namespace MarvelAPI.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Thumbnail");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CharacterInformationId = 1,
+                            Extension = "jpg",
+                            Path = "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.Url", b =>
@@ -312,6 +436,22 @@ namespace MarvelAPI.Data.Migrations
                     b.HasIndex("CharacterInformationId");
 
                     b.ToTable("Url");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CharacterInformationId = 1,
+                            Type = "detail",
+                            Uri = "http://marvel.com/characters/76/a-bomb?utm_campaign=apiRef&utm_source=d56c9ed938d7d397eb1933d4070e8cda"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CharacterInformationId = 1,
+                            Type = "comiclink",
+                            Uri = "http://marvel.com/comics/characters/1017100/a-bomb_has?utm_campaign=apiRef&utm_source=d56c9ed938d7d397eb1933d4070e8cda"
+                        });
                 });
 
             modelBuilder.Entity("MarvelAPI.Business.Models.CharacterInformation", b =>

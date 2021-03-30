@@ -4,7 +4,7 @@ namespace MarvelAPI.Business.Models
 {
     public class CharacterInformation : Entity
     {
-        public string MarvelId { get; set; }
+        public int MarvelId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Modified { get; set; }

@@ -40,6 +40,24 @@ namespace MarvelAPI.Api.Controllers
             }
 
         }
+        [HttpGet("{characterId}")]
+        public async Task<string> ObterPorId(int characterId)
+        {
+            try
+            {
+                var character = await _characterRepository.ObterComDetalhes(characterId);
+
+                if (character == null)
+                    return JsonConvert.SerializeObject(PopularErrorViewModel(EHttpStatusCode.NotFound, MessageConstants.PersonagemNaoLocalizado, string.Empty), Formatting.Indented);
+
+                return JsonConvert.SerializeObject(_mapper.Map<CharacterViewModel>(character), Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                return JsonConvert.SerializeObject(PopularErrorViewModel(EHttpStatusCode.BadRequest, ex.Message, string.Empty), Formatting.Indented);
+            }
+
+        }
         private ErrorViewModel PopularErrorViewModel(EHttpStatusCode statusCode, string message, string userInput)
         {
             return new ErrorViewModel() { StatusCode = (int)statusCode, Message = message, UserInput = userInput };

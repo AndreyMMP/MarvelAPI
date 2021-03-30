@@ -28,7 +28,7 @@ namespace MarvelAPI.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MarvelId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MarvelId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Modified = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -53,7 +53,7 @@ namespace MarvelAPI.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CharacterInformationId = table.Column<int>(type: "int", nullable: false),
-                    Available = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Available = table.Column<int>(type: "int", nullable: false),
                     CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -74,7 +74,7 @@ namespace MarvelAPI.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CharacterInformationId = table.Column<int>(type: "int", nullable: false),
-                    Available = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Available = table.Column<int>(type: "int", nullable: false),
                     CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -95,7 +95,7 @@ namespace MarvelAPI.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CharacterInformationId = table.Column<int>(type: "int", nullable: false),
-                    Available = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Available = table.Column<int>(type: "int", nullable: false),
                     CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -116,7 +116,7 @@ namespace MarvelAPI.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CharacterInformationId = table.Column<int>(type: "int", nullable: false),
-                    Available = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Available = table.Column<int>(type: "int", nullable: false),
                     CollectionURI = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -255,6 +255,78 @@ namespace MarvelAPI.Data.Migrations
                         principalTable: "Stories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Character",
+                columns: new[] { "Id", "AttributionHTML", "AttributionText", "Copyright", "Etag" },
+                values: new object[] { 1, "<a href=\"http://marvel.com\">Data provided by Marvel. © 2021 MARVEL</a>", "Data provided by Marvel. © 2021 MARVEL", "© 2021 MARVEL", "20cf4cd43cc9cd35833392e0964888958f576824" });
+
+            migrationBuilder.InsertData(
+                table: "CharacterInformation",
+                columns: new[] { "Id", "CharacterId", "Description", "MarvelId", "Modified", "Name", "ResourceURI" },
+                values: new object[] { 1, 1, "Rick Jones has been Hulk's best bud since day one, but now he's more than a friend...he's a teammate! Transformed by a Gamma energy explosion, A-Bomb's thick, armored skin is just as strong and powerful as it is blue. And when he curls into action, he uses it like a giant bowling ball of destruction!", 1017100, "30/03/2021 17:12:16", "A-Bomb (HAS)", "http://gateway.marvel.com/v1/public/characters/1017100" });
+
+            migrationBuilder.InsertData(
+                table: "Comics",
+                columns: new[] { "Id", "Available", "CharacterInformationId", "CollectionURI" },
+                values: new object[] { 1, 3, 1, "http://gateway.marvel.com/v1/public/characters/1017100/comics" });
+
+            migrationBuilder.InsertData(
+                table: "Events",
+                columns: new[] { "Id", "Available", "CharacterInformationId", "CollectionURI" },
+                values: new object[] { 1, 0, 1, "http://gateway.marvel.com/v1/public/characters/1017100/events" });
+
+            migrationBuilder.InsertData(
+                table: "Series",
+                columns: new[] { "Id", "Available", "CharacterInformationId", "CollectionURI" },
+                values: new object[] { 1, 2, 1, "http://gateway.marvel.com/v1/public/characters/1017100/series" });
+
+            migrationBuilder.InsertData(
+                table: "Stories",
+                columns: new[] { "Id", "Available", "CharacterInformationId", "CollectionURI" },
+                values: new object[] { 1, 2, 1, "http://gateway.marvel.com/v1/public/characters/1017100/stories" });
+
+            migrationBuilder.InsertData(
+                table: "Thumbnail",
+                columns: new[] { "Id", "CharacterInformationId", "Extension", "Path" },
+                values: new object[] { 1, 1, "jpg", "http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16" });
+
+            migrationBuilder.InsertData(
+                table: "Url",
+                columns: new[] { "Id", "CharacterInformationId", "Type", "Uri" },
+                values: new object[,]
+                {
+                    { 1, 1, "detail", "http://marvel.com/characters/76/a-bomb?utm_campaign=apiRef&utm_source=d56c9ed938d7d397eb1933d4070e8cda" },
+                    { 2, 1, "comiclink", "http://marvel.com/comics/characters/1017100/a-bomb_has?utm_campaign=apiRef&utm_source=d56c9ed938d7d397eb1933d4070e8cda" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ComicsItem",
+                columns: new[] { "Id", "ComicsId", "Name", "ResourceURI" },
+                values: new object[,]
+                {
+                    { 1, 1, "Hulk (2008) #53", "http://gateway.marvel.com/v1/public/comics/40632" },
+                    { 2, 1, "Hulk (2008) #54", "http://gateway.marvel.com/v1/public/comics/40630" },
+                    { 3, 1, "Hulk (2008) #55", "http://gateway.marvel.com/v1/public/comics/40628" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SeriesItem",
+                columns: new[] { "Id", "Name", "ResourceURI", "SeriesId" },
+                values: new object[,]
+                {
+                    { 1, "FREE COMIC BOOK DAY 2013 1 (2013)", "http://gateway.marvel.com/v1/public/series/17765", 1 },
+                    { 2, "Hulk (2008 - 2012)", "http://gateway.marvel.com/v1/public/series/3374", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StoriesItem",
+                columns: new[] { "Id", "Name", "ResourceURI", "StoriesId", "Type" },
+                values: new object[,]
+                {
+                    { 1, "Hulk (2008) #55", "http://gateway.marvel.com/v1/public/stories/92078", 1, "cover" },
+                    { 2, "Interior #92079", "http://gateway.marvel.com/v1/public/stories/92079", 1, "interiorStory" }
                 });
 
             migrationBuilder.CreateIndex(
